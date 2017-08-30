@@ -1,23 +1,63 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <fire-canvas class="fire"></fire-canvas>
     <router-view></router-view>
+    <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+      <dialog-box v-if="dialog.show"></dialog-box>
+    </transition>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'app'
-}
+  import FireCanvas   from './components/share/FireCanvas'
+  import spinner      from './components/share/spinner'
+  import DialogBox    from './components/share/DialogBox'
+  import {mapState}   from 'vuex'
+  import smoothScroll from 'smooth-scroll'
+
+  export default {
+    created(){
+      //smoothScroll.init()
+    },
+    mounted(){
+      document.addEventListener("visibilitychange", this.changeTitle, false)
+    },
+    components: {
+      FireCanvas,
+      spinner,
+      DialogBox
+    },
+    computed: {
+      ...mapState(['isLoading', 'dialog'])
+    },
+    methods: {
+      changeTitle(){
+        if (document.hidden) {
+          document.title = "去吧，皮卡丘！"
+        } else {
+          document.title = "欢迎回来"
+        }
+      }
+    }
+  }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  #app {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    min-height: 100%;
+    width: 100%;
+  }
+
+  @media screen and (max-width: 440px) {
+    .fire {
+      display: none;
+    }
+
+    #app {
+      background: #000;
+    }
+  }
 </style>

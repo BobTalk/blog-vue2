@@ -1,9 +1,9 @@
 const article = require("./article.js")
 const draft = require("./draft.js")
 const tag = require("./tag.js")
-const comment = require("./comment")
-const login = require("./login")
-const user = require("./user")
+const comment = require("./comment.js")
+const login = require("./login.js")
+const user = require("./user.js")
 
 module.exports = (app)=> {
   app.use(article)

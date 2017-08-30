@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const db = require("../db/db.js")
-const confirmToken = require("../middlewares/confirmToken")
+const confirmToken = require("../middlewares/confirmToken.js")
 /**
  *req.query.payload 此方法主要用于接收表单数据
 */
